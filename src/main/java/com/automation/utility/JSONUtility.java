@@ -1,5 +1,6 @@
 package com.automation.utility;
 
+import com.automation.constants.Env;
 import com.automation.pojos.Config;
 import com.automation.pojos.Environment;
 import com.google.gson.Gson;
@@ -10,23 +11,20 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class JSONUtility {
-    public static String readJSON() {
+
+    public static Environment readJSON(Env env) {
+
         Gson gson = new Gson();
-
-        BufferedReader jsonFile = null;
+        File jsonFile = new File(System.getProperty("user.dir") + "/config/config.json");
+        FileReader fileReader = null;
         try {
-            jsonFile = new BufferedReader(
-                    new FileReader(System.getProperty("user.dir") + "/config/config.json")
-            );
+            fileReader = new FileReader(jsonFile);
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-
-        Config config = gson.fromJson(jsonFile, Config.class);
-
-        System.out.println("Config object: " + config.getEnvironments());
-
-        Environment environment = config.getEnvironments().get("DEV");
-        return environment.getUrl();
+        Config config = gson.fromJson(fileReader, Config.class);
+        Environment environment = config.getEnvironments().get("QA");
+        return environment;
     }
 }

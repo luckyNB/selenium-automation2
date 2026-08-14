@@ -2,18 +2,34 @@ package com.automation.pages;
 
 import com.automation.utility.BrowserUtility;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 public class MyAccountPage extends BrowserUtility {
-    static final By USERNAME_ONMY_ACCOUNT_PAGE_LOCATOR = By.xpath("//span[contains(text(),'Laxman Patil Bhosle')]");
+    private static final By USER_NAME_LOCATOR = By.xpath("//a[@title='View my customer account']");
+    private static final By SEARCH_TEXT_BOX_LOCATOR = By.id("search_query_top");
+    private static final By ADD_NEW_ADDRESS_LINK_LOCATOR = By.xpath("//span[text()='Add my first address']");
 
     public MyAccountPage(WebDriver driver) {
         super(driver);
+        // TODO Auto-generated constructor stub
     }
 
+    public String getUserName() {
+        return getVisibleText(USER_NAME_LOCATOR);
+    }
 
-    public String getUserNameOnMyAccountPage() {
-        System.out.println("Retrieving user name on My Account Page...");
-        return driver.findElement(USERNAME_ONMY_ACCOUNT_PAGE_LOCATOR).getText();
+    public SearchResultPage searchForAProduct(String productName) {
+        enterText(SEARCH_TEXT_BOX_LOCATOR, productName);
+        enterSpecialKey(SEARCH_TEXT_BOX_LOCATOR, Keys.ENTER);
+        SearchResultPage searchResultPage = new SearchResultPage(getDriver());
+        return searchResultPage;
+    }
+
+    public AddressPage goToAddAddressPage() {
+        clickOn(ADD_NEW_ADDRESS_LINK_LOCATOR);
+
+        AddressPage addressPage = new AddressPage(getDriver());
+        return addressPage;
     }
 }

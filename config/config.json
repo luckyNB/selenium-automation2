@@ -1,12 +1,19 @@
+
+
 {
-  "data": [
-    {
-      "emailAddress": "laxmanbhosale@test.com",
-      "password": "Test@1234"
+  "environments": {
+    "DEV": {
+      "url": "https://automationpractice.techwithjatin.com/",
+      "MAX_NUMBER_OF_ATTEMPTS" : 1
     },
-    {
-      "emailAddress": "laxmanbhosale@test.com",
-      "password": "Test@1234"
+    "QA": {
+      "url": "https://automationpractice.techwithjatin.com/",
+      "MAX_NUMBER_OF_ATTEMPTS" : 3
+
+    },
+    "UAT": {
+      "url": "https://automationpractice.techwithjatin.com/",
+      "MAX_NUMBER_OF_ATTEMPTS" : 3
     }
-  ]
+  }
 }

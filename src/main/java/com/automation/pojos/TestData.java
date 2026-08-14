@@ -1,12 +1,18 @@
 package com.automation.pojos;
 
-import lombok.Getter;
-import lombok.Setter;
+
 
 import java.util.List;
-@Getter
-@Setter
-public class TestData {
-    private List<User> users;
+
+public class TestData {	List<User> data;
+
+    public List<User> getData() {
+        return data;
+    }
+
+    public void setData(List<User> data) {
+        this.data = data;
+    }
+
 
 }
