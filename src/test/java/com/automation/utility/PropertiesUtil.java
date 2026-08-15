@@ -3,7 +3,6 @@ package com.automation.utility;
 import com.automation.constants.Env;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;

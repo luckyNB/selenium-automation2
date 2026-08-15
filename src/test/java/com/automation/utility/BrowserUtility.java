@@ -10,7 +10,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -269,7 +268,7 @@ public abstract class BrowserUtility {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("HH-mm-ss");
         String timeStamp = format.format(date);
-        String path = "./screenshots/" + name + " - " + timeStamp + ".png";
+        String path = System.getProperty("user.dir")+"/screenshots/" + name + " - " + timeStamp + ".png";
         File screenshotFile = new File(path);
         try {
             FileUtils.copyFile(screenshotData, screenshotFile);

@@ -2,12 +2,10 @@ package com.automation.pages;
 
 import com.automation.constants.Browser;
 import static com.automation.constants.Env.*;
-import static java.sql.DriverManager.getDriver;
 
 import com.automation.utility.BrowserUtility;
 import com.automation.utility.JSONUtility;
 import com.automation.utility.LoggerUtlity;
-import com.automation.utility.PropertiesUtil;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

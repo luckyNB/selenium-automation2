@@ -1,13 +1,15 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="Automation Practice Test Suite"
-	   parallel="methods"
-	   verbose="1">
+<suite name="Automation Practice Test Suite" verbose="1">
 
 	<test name="UI Automation Test">
 
 		<classes>
-			<class name="com.automation.tests.LoginTest"/>
+			<class name="com.automation.tests.LoginTestWithDataDriven"/>
+		<!--	<class name="com.automation.tests.InvalidCredLoginTest"/>
+			<class name="com.automation.tests.AddNewFirstAddressTest"/>
+			<class name="com.automation.tests.ProductCheckoutTest"/>
+			<class name="com.automation.tests.SearchProductTest"/>-->
 		</classes>
 
 	</test>
