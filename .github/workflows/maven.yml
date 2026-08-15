@@ -1,42 +1,73 @@
-
-
-
 name: Test Automation Workflow
 
 on:
-  schedule:
-    - cron: 00 18 * * *
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+
+  schedule:
+    # Runs every day at 11:30 PM IST (18:00 UTC)
+    - cron: '0 18 * * *'
+
+  workflow_dispatch:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 11
-      uses: actions/setup-java@v4
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: maven
-    - name: Running Test Automation Framework with Maven
-      run: mvn test -X -Dbrowser=chrome -DisLambdaTest=true -DisHeadless=false
-    - name: Upload test logs
-      if: always()
-      uses: actions/upload-artifact@v7.0.1
-      with:
-        name: Test logs
-        path: logs/
-    - name: Upload test Reports
-      if: always()
-      uses: actions/upload-artifact@v7.0.1
-      with:
-        name: Test logs
-        path: report.html
-    - name: Test execution Status
-      run: echo "Test execution completed"
+      # Checkout source code
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      # Setup Java
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: maven
+
+      # Verify Java and Maven versions
+      - name: Verify Java and Maven
+        run: |
+          java -version
+          mvn -version
+
+      # Run Selenium automation tests
+      - name: Run Test Automation Framework
+        run: |
+          mvn clean test \
+            -Dbrowser=chrome \
+            -DisLambdaTest=true \
+            -DisHeadless=true
+        env:
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+
+      # Upload test logs even when tests fail
+      - name: Upload test logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-logs
+          path: logs/
+          if-no-files-found: warn
+
+      # Upload test report even when tests fail
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: report.html
+          if-no-files-found: warn
+
+      # Final status
+      - name: Test execution completed
+        if: always()
+        run: echo "Test execution completed"
