@@ -6,10 +6,10 @@
 
 		<classes>
 			<class name="com.automation.tests.LoginTestWithDataDriven"/>
-		<!--	<class name="com.automation.tests.InvalidCredLoginTest"/>
+			<class name="com.automation.tests.InvalidCredLoginTest"/>
 			<class name="com.automation.tests.AddNewFirstAddressTest"/>
 			<class name="com.automation.tests.ProductCheckoutTest"/>
-			<class name="com.automation.tests.SearchProductTest"/>-->
+			<class name="com.automation.tests.SearchProductTest"/>
 		</classes>
 
 	</test>
